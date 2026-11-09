@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEURO//PATH — навигатор профессий в эпоху ИИ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="#top">NEURO<span>//</span>PATH</a>
+  <button class="burger" id="burger" aria-label="Меню">☰ МЕНЮ</button>
+  <ul id="menu">
+    <li><a href="#risk">Риск</a></li>
+    <li><a href="#skills">Навыки</a></li>
+    <li><a href="#roadmap">План</a></li>
+    <li><a href="#map">Профессии</a></li>
+    <li><a href="#chart">Динамика</a></li>
+    <li><a href="#timeline">Хроника</a></li>
+  </ul>
+</div></nav>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div class="tag">// система навигации по рынку труда v3.0</div>
+    <h1 class="glitch" data-t="NEURO//PATH">NEURO//PATH</h1>
+    <p class="lead">Узнайте, насколько ваша профессия уязвима для ИИ, найдите слабые навыки и получите личный план действий на 12 месяцев. Не пересказ темы, а рабочий инструмент.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#risk">Начать анализ</a>
+      <a class="btn line" href="#map">Карта профессий</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-count="8">0</b><span>профессий в карте</span></div>
+      <div class="stat"><b data-count="8">0</b><span>навыков в диагностике</span></div>
+      <div class="stat"><b data-count="4">0</b><span>фазы личного плана</span></div>
+      <div class="stat"><b id="statAn">0</b><span>ваших анализов</span></div>
+    </div>
+  </header>
+
+  <!-- RISK -->
+  <section id="risk">
+    <div class="sh"><h2><i>▸</i>Анализатор риска</h2><p>Укажите профессию, отрасль, опыт и уровень работы с ИИ. Расчёт идёт по открытой формуле, она описана в документе проекта.</p></div>
+    <div class="two">
+      <div class="panel has-cap"><div class="cap">// ввод данных</div>
+        <div class="form">
+          <div class="f full"><label for="prof">Профессия</label><input id="prof" placeholder="Например: бухгалтер, дизайнер, веб-разработчик"></div>
+          <div class="f"><label for="ind">Отрасль</label>
+            <select id="ind"><option value="">— выберите —</option>
+              <option value="manufacturing">Производство (80)</option><option value="retail">Торговля и услуги (75)</option>
+              <option value="finance">Финансы (65)</option><option value="legal">Юриспруденция (60)</option>
+              <option value="healthcare">Здравоохранение (55)</option><option value="creative">Креативные индустрии (50)</option>
+              <option value="tech">IT и технологии (45)</option><option value="education">Образование (40)</option></select></div>
+          <div class="f"><label for="exp">Опыт</label>
+            <select id="exp"><option value="">— выберите —</option><option value="junior">Менее 2 лет (+5)</option><option value="middle">2–5 лет (0)</option><option value="senior">5–10 лет (−10)</option><option value="expert">Более 10 лет (−15)</option></select></div>
+          <div class="f full"><label for="ai">Использование ИИ в работе</label>
+            <select id="ai"><option value="">— выберите —</option><option value="none">Не использую (0)</option><option value="basic">Базово (−10)</option><option value="advanced">Активно (−20)</option><option value="expert">На экспертном уровне (−30)</option></select></div>
+        </div>
+        <div class="row">
+          <button class="btn" id="btnAnalyze">Запустить анализ</button>
+          <button class="btn line" id="btnDemo">Заполнить пример</button>
+          <button class="btn line" id="btnReset">Сбросить</button>
+        </div>
+      </div>
+      <div class="res" id="result">
+        <div class="idle"><div class="big">00%</div><p>Здесь появится ваш результат: индекс риска, разбор по факторам и рекомендации.</p></div>
+      </div>
+    </div>
+    <div class="row" id="resActions" style="display:none">
+      <button class="btn ghost" id="btnPlan">Построить план →</button>
+      <button class="btn line" id="btnCopy">Копировать результат</button>
+      <button class="btn line" id="btnDl">Скачать отчёт (.txt)</button>
+    </div>
+    <div style="margin-top:28px">
+      <div class="row" style="margin:0 0 10px;align-items:center;justify-content:space-between"><h3 style="font-size:1rem;color:var(--cyan)">ИСТОРИЯ АНАЛИЗОВ</h3><button class="btn line" id="btnClearHist" style="padding:8px 16px">Очистить</button></div>
+      <div class="hist" id="hist"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="sh"><h2><i>▸</i>Диагностика навыков</h2><p>Оцените себя ползунками. Жёлтая метка — уровень, который сегодня считается достаточным. Разрыв покажет, что учить в первую очередь.</p></div>
+    <div class="panel has-cap"><div class="cap">// skill gap analyzer</div>
+      <div class="skills" id="skillList"></div>
+      <div class="row">
+        <button class="btn" id="btnGap">Рассчитать разрыв</button>
+        <button class="btn line" id="btnRandSk">Случайный профиль</button>
+        <button class="btn line" id="btnZeroSk">Обнулить</button>
+      </div>
+      <div class="prio" id="prio"></div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap">
+    <div class="sh"><h2><i>▸</i>Личный план на 12 месяцев</h2><p>План строится из результата анализа и ваших слабых навыков. Отмечайте выполненные шаги: прогресс сохраняется в браузере.</p></div>
+    <div id="roadBox"><div class="empty">// сначала выполните анализ риска, затем нажмите «Построить план»</div></div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sh"><h2><i>▸</i>Карта профессий</h2><p>Нажмите на карточку, чтобы увидеть, как меняется роль и что учить.</p></div>
+    <div class="filters">
+      <input id="search" placeholder="Поиск по названию или навыку…">
+      <button class="fb on" data-f="all">Все</button><button class="fb" data-f="crit">Критично</button>
+      <button class="fb" data-f="evo">Эволюция</button><button class="fb" data-f="new">Новые</button>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- CHART -->
+  <section id="chart">
+    <div class="sh"><h2><i>▸</i>Динамика рынка труда</h2><p>Модельный сценарий структуры занятости 2020–2026. Включайте и выключайте линии, наводите курсор на точки.</p></div>
+    <div class="chartbox">
+      <div class="legend" id="legend"></div>
+      <canvas id="cv"></canvas>
+      <div class="note">* Иллюстративная модель проекта, а не официальная статистика.</div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="sh"><h2><i>▸</i>Хроника 2020–2030</h2><p>Ключевые этапы: что уже произошло и какие сценарии ожидаются.</p></div>
+    <div class="tl" id="tl"></div>
+  </section>
+</main>
+
+<footer>// NEURO//PATH // ПРОЕКТ: ВЛИЯНИЕ ИИ НА ПРОФЕССИИ // HTML + CSS + JAVASCRIPT + CANVAS // 2026 //</footer>
+
+<div class="modal" id="modal"><div class="mbox" id="mbox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
