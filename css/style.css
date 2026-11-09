@@ -183,3 +183,4 @@ footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-fa
   .kv{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+h1 { color: red; }
